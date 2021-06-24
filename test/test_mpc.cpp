@@ -47,7 +47,6 @@ TEST(MPC, discretizer)
   constexpr double eps = 1e-8;
 
   using cbr::DltvOcp;
-  using cbr::DltvOcpParams;
   using cbr::DltvOcpSolver;
   using cbr::DltvOcpSolverParams;
 

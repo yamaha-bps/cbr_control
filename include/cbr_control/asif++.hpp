@@ -9,6 +9,7 @@
 #include <autodiff/forward/eigen.hpp>
 
 #include <boost/numeric/odeint.hpp>
+#include <boost/hana/adapt_struct.hpp>
 
 #include <cbr_math/lie/odeint.hpp>
 #include <cbr_math/lie/common.hpp>
@@ -350,5 +351,21 @@ private:
 };
 
 }  // namespace cbr
+
+// cppcheck-suppres unknownMacro
+BOOST_HANA_ADAPT_STRUCT(
+  cbr::ASIFParams,
+  dt,
+  steps,
+  constr_dist,
+  relax_cost,
+  alpha,
+  osqp_eps_abs,
+  osqp_eps_rel,
+  osqp_polish,
+  osqp_timelimit,
+  osqp_maxiter,
+  debug
+);
 
 #endif  // CBR_CONTROL__ASIF___HPP_

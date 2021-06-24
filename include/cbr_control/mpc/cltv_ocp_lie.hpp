@@ -25,10 +25,6 @@ namespace cbr
 /*                          Lie group Optimal Control Problem Linearizer                          */
 /* ---------------------------------------------------------------------------------------------- */
 
-struct CltvOcpLieParams
-{
-};
-
 /**
  * @brief Linearize a nonlinear control problem defined on a Lie group to a continuous linear time-varying problem
  * @tparam lie_pb_t nonlinear problem on Lie group satisfying interface conditions
@@ -131,8 +127,7 @@ public:
 
   template<typename T1, typename T2>
   CltvOcpLie(T1 && pb, T2 && prm)
-  : nl_pb_(std::forward<T1>(pb)),
-    prm_(std::forward<T2>(prm))
+  : nl_pb_(std::forward<T1>(pb))
   {}
 
   void get_x0(Eigen::Ref<state_t> x0) const
@@ -249,12 +244,6 @@ public:
     return (ul - ud).transpose() * R;
   }
 
-  template<typename T>
-  void set_params(T && p)
-  {
-    prm_ = std::forward<T>(p);
-  }
-
   lie_pb_t & problem()
   {
     return nl_pb_;
@@ -262,7 +251,6 @@ public:
 
 protected:
   lie_pb_t nl_pb_{};
-  CltvOcpLieParams prm_{};
 };
 
 // Class template argument deduction guides
@@ -273,5 +261,6 @@ template<typename T1, typename T2>
 CltvOcpLie(T1, T2)->CltvOcpLie<T1>;
 
 }  // namespace cbr
+
 
 #endif  // CBR_CONTROL__MPC__CLTV_OCP_LIE_HPP_

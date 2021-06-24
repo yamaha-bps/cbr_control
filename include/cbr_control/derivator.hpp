@@ -5,7 +5,7 @@
 #ifndef CBR_CONTROL__DERIVATOR_HPP_
 #define CBR_CONTROL__DERIVATOR_HPP_
 
-#include <boost/fusion/adapted/struct.hpp>
+#include <boost/hana/adapt_struct.hpp>
 
 #include <cbr_utils/cyber_timer.hpp>
 
@@ -145,9 +145,9 @@ protected:
 }  // namespace cbr
 
 // cppcheck-suppress unknownMacro
-BOOST_FUSION_ADAPT_STRUCT(
+BOOST_HANA_ADAPT_STRUCT(
   cbr::DerivatorParams,
   filter_tau
-)
+);
 
 #endif  // CBR_CONTROL__DERIVATOR_HPP_
