@@ -94,8 +94,8 @@ jobs:
           path: "tools/cbr_math"
       - name: Build and install cbr_math
         run: |
-          mdkir ${{ github.workspace }}/tools/cbr_utils/build
-          cd ${{ github.workspace }}/tools/cbr_utils/build
+          mkdir ${{ github.workspace }}/tools/cbr_math/build
+          cd ${{ github.workspace }}/tools/cbr_math/build
           cmake .. -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF
           make -j2
           sudo make install
