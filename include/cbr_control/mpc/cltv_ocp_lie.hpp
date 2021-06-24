@@ -125,8 +125,8 @@ public:
   : nl_pb_(std::move(pb))
   {}
 
-  template<typename T1, typename T2>
-  CltvOcpLie(T1 && pb, T2 && prm)
+  template<typename T1>
+  CltvOcpLie(T1 && pb)
   : nl_pb_(std::forward<T1>(pb))
   {}
 

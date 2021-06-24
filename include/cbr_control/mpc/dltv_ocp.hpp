@@ -157,8 +157,8 @@ public:
     dt_{compute_dt()}
   {}
 
-  template<typename T1, typename T2>
-  DltvOcp(T1 && pb, T2 && prm)
+  template<typename T1>
+  DltvOcp(T1 && pb)
   : cltv_pb_(std::forward<T1>(pb)),
     dt_{compute_dt()}
   {}
