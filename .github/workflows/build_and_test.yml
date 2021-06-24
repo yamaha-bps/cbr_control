@@ -30,7 +30,7 @@ jobs:
           libgtest-dev \
           libyaml-cpp-dev \
           libeigen3-dev
-          git clone https//github.com/strasdat/Sophus.git
+          git clone https://github.com/strasdat/Sophus.git
           mkdir Sophus/build
           cd Sophus/build
           git checkout v1.0.0
@@ -38,7 +38,7 @@ jobs:
           make -j2
           sudo make install
           cd ../..
-          git clone --recursive https//github.com/yamaha-bps/osqp.git
+          git clone --recursive https://github.com/yamaha-bps/osqp.git
           mkdir osqp/build
           cd osqp/build
           git checkout v0.6.0
@@ -46,7 +46,7 @@ jobs:
           cmake --build .
           sudo cmake --build . --target install
           cd ../..
-          git clone https//github.com/yamaha-bps/autodiff.git
+          git clone https://github.com/yamaha-bps/autodiff.git
           mkdir autodiff/build
           cd autodiff/build
           git checkout v0.5.12
@@ -54,14 +54,14 @@ jobs:
           make -j2
           sudo make install
           cd ../..
-          git clone https//github.com/yamaha-bps/cbr_utils.git
+          git clone https://github.com/yamaha-bps/cbr_utils.git
           mdkir cbr_utils/build
           cd cbr_utils/build
           cmake .. -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF
           make -j2
           sudo make install
           cd ../..
-          git clone https//github.com/yamaha-bps/cbr_math.git
+          git clone https://github.com/yamaha-bps/cbr_math.git
           mdkir cbr_utils/build
           cd cbr_utils/build
           cmake .. -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF
