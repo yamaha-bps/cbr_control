@@ -534,7 +534,7 @@ public:
     // Create U
     const Eigen::Map<const Eigen::Matrix<double, nu, nPts - 1>> mU(sol_.z.data() + nX);
 
-    sol_.u.template col(nPts - 1) = mU.template rightCols<1>();
+    sol_.u col(nPts - 1) = mU.template rightCols<1>();
     sol_.u.template leftCols<nPts - 1>() = mU;
 
     return sol_;
