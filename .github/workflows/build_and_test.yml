@@ -33,7 +33,6 @@ jobs:
           git clone https://github.com/strasdat/Sophus.git
           mkdir Sophus/build
           cd Sophus/build
-          git checkout v1.0.0
           cmake ..
           make -j2
           sudo make install
