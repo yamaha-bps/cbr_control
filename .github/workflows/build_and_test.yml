@@ -37,8 +37,8 @@ jobs:
           repository: strasdat/Sophus
       - name: Build and Install Sophus
         run: |
-          mkdir Sophus/build
-          cd Sophus/build
+          mkdir ${{ github.workspace }}/Sophus/build
+          cd ${{ github.workspace }}/Sophus/build
           cmake ..
           make -j2
           sudo make install
@@ -51,8 +51,8 @@ jobs:
           submodules: true
       - name: Build and install OSQP
         run: |
-          mkdir osqp/build
-          cd osqp/build
+          mkdir ${{ github.workspace }}/osqp/build
+          cd ${{ github.workspace }}/osqp/build
           cmake -G "Unix Makefiles" ..
           cmake --build .
           sudo cmake --build . --target install
@@ -64,8 +64,8 @@ jobs:
           ref: v0.5.12
       - name: Build and install autodiff
         run: |
-          mkdir autodiff/build
-          cd autodiff/build
+          mkdir ${{ github.workspace }}/autodiff/build
+          cd ${{ github.workspace }}/autodiff/build
           cmake ..
           make -j2
           sudo make install
@@ -76,8 +76,8 @@ jobs:
           repository: yamaha-bps/cbr_utils
       - name: Build and install cbr_utils
         run: |
-          mkdir cbr_utils/build
-          cd cbr_utils/build
+          mkdir ${{ github.workspace }}/cbr_utils/build
+          cd ${{ github.workspace }}/cbr_utils/build
           cmake .. -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF
           make -j2
           sudo make install
@@ -88,8 +88,8 @@ jobs:
           repository: yamaha-bps/cbr_math
       - name: Build and install cbr_math
         run: |
-          mdkir cbr_utils/build
-          cd cbr_utils/build
+          mdkir ${{ github.workspace }}/cbr_utils/build
+          cd ${{ github.workspace }}/cbr_utils/build
           cmake .. -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF
           make -j2
           sudo make install
