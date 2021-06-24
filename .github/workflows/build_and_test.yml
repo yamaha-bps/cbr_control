@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install dependencies
+      - name: Install apt dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
@@ -30,37 +30,59 @@ jobs:
           libgtest-dev \
           libyaml-cpp-dev \
           libeigen3-dev
-          git clone https://github.com/strasdat/Sophus.git
+
+      - name: Build and install Sophus
+        uses: actions/checkout@v2
+        with:
+          repository: strasdat/Sophus
+        run: |
           mkdir Sophus/build
           cd Sophus/build
           cmake ..
           make -j2
           sudo make install
-          cd ../..
-          git clone --recursive https://github.com/yamaha-bps/osqp.git
+
+      - name: Build and install OSQP
+        uses: actions/checkout@v2
+        with:
+          repository: yamaha-bps/osqp
+          ref: v0.6.0
+          submodules: true
+        run: |
           mkdir osqp/build
           cd osqp/build
-          git checkout v0.6.0
           cmake -G "Unix Makefiles" ..
           cmake --build .
           sudo cmake --build . --target install
-          cd ../..
-          git clone https://github.com/yamaha-bps/autodiff.git
+
+      - name: Build and install autodiff
+        uses: actions/checkout@v2
+        with:
+          repository: yamaha-bps/autodiff
+          ref: v0.5.12
+        run: |
           mkdir autodiff/build
           cd autodiff/build
-          git checkout v0.5.12
           cmake ..
           make -j2
           sudo make install
-          cd ../..
-          git clone https://github.com/yamaha-bps/cbr_utils.git
-          mdkir cbr_utils/build
+
+      - name: Build and install cbr_utils
+        uses: actions/checkout@v2
+        with:
+          repository: yamaha-bps/cbr_utils
+        run: |
+          mkdir cbr_utils/build
           cd cbr_utils/build
           cmake .. -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF
           make -j2
           sudo make install
-          cd ../..
-          git clone https://github.com/yamaha-bps/cbr_math.git
+
+      - name: Build and install cbr_math
+        uses: actions/checkout@v2
+        with:
+          repository: yamaha-bps/cbr_math
+        run: |
           mdkir cbr_utils/build
           cd cbr_utils/build
           cmake .. -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF
