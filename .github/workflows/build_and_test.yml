@@ -31,10 +31,11 @@ jobs:
           libyaml-cpp-dev \
           libeigen3-dev
 
-      - name: Build and install Sophus
+      - name: Checkout Sophus
         uses: actions/checkout@v2
         with:
           repository: strasdat/Sophus
+      - name: Build and Install Sophus
         run: |
           mkdir Sophus/build
           cd Sophus/build
@@ -42,12 +43,13 @@ jobs:
           make -j2
           sudo make install
 
-      - name: Build and install OSQP
+      - name: checkout OSQP
         uses: actions/checkout@v2
         with:
           repository: yamaha-bps/osqp
           ref: v0.6.0
           submodules: true
+      - name: Build and install OSQP
         run: |
           mkdir osqp/build
           cd osqp/build
@@ -55,11 +57,12 @@ jobs:
           cmake --build .
           sudo cmake --build . --target install
 
-      - name: Build and install autodiff
+      - name: Checkout autodiff
         uses: actions/checkout@v2
         with:
           repository: yamaha-bps/autodiff
           ref: v0.5.12
+      - name: Build and install autodiff
         run: |
           mkdir autodiff/build
           cd autodiff/build
@@ -67,10 +70,11 @@ jobs:
           make -j2
           sudo make install
 
-      - name: Build and install cbr_utils
+      - name: Checkout cbr_utils
         uses: actions/checkout@v2
         with:
           repository: yamaha-bps/cbr_utils
+      - name: Build and install cbr_utils
         run: |
           mkdir cbr_utils/build
           cd cbr_utils/build
@@ -78,10 +82,11 @@ jobs:
           make -j2
           sudo make install
 
-      - name: Build and install cbr_math
+      - name: Checkout cbr_math
         uses: actions/checkout@v2
         with:
           repository: yamaha-bps/cbr_math
+      - name: Build and install cbr_math
         run: |
           mdkir cbr_utils/build
           cd cbr_utils/build
