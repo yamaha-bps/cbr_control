@@ -1,6 +1,6 @@
 // Copyright Yamaha 2021
 // MIT License
-// https://github.com/yamaha-bps/cbr_math/blob/master/LICENSE
+// https://github.com/yamaha-bps/cbr_control/blob/master/LICENSE
 
 #ifndef CBR_CONTROL__MPC__CLTV_OCP_HPP_
 #define CBR_CONTROL__MPC__CLTV_OCP_HPP_
@@ -107,10 +107,9 @@ public:
   : nl_pb_(std::move(pb))
   {}
 
-  template<typename T1, typename T2>
-  CltvOcp(T1 && pb, T2 && prm)
-  : nl_pb_(std::forward<T1>(pb)),
-    prm_(std::forward<T2>(prm))
+  template<typename T1>
+  CltvOcp(T1 && pb)
+  : nl_pb_(std::forward<T1>(pb))
   {}
 
   void get_x0(Eigen::Ref<state_t> x0) const
@@ -225,12 +224,6 @@ public:
     return (ul - ud).transpose() * R;
   }
 
-  template<typename T>
-  void set_params(T && p)
-  {
-    prm_ = std::forward<T>(p);
-  }
-
   nl_pb_t & problem()
   {
     return nl_pb_;
@@ -238,7 +231,6 @@ public:
 
 protected:
   nl_pb_t nl_pb_{};
-  CltvOcpParams prm_{};
 };
 
 // Class template argument deduction guides

@@ -1,6 +1,6 @@
 // Copyright Yamaha 2021
 // MIT License
-// https://github.com/yamaha-bps/cbr_math/blob/master/LICENSE
+// https://github.com/yamaha-bps/cbr_control/blob/master/LICENSE
 
 #ifndef PLANARQUAD_DYNAMICS_HPP_
 #define PLANARQUAD_DYNAMICS_HPP_

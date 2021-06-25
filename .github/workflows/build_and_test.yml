@@ -1,0 +1,224 @@
+name: build_and_test
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch: ~
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-20.04]
+        build_type: [Release, Debug]
+        compiler:
+          [{ "cc": "gcc", "cxx": "g++" }, { "cc": "clang", "cxx": "clang++" }]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install apt dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+          libboost-dev \
+          libgtest-dev \
+          libyaml-cpp-dev \
+          libeigen3-dev
+          mkdir ${{ github.workspace }}/tools/
+
+      - name: Checkout Sophus
+        uses: actions/checkout@v2
+        with:
+          repository: yamaha-bps/Sophus
+          path: "tools/Sophus"
+      - name: Build and Install Sophus
+        run: |
+          mkdir ${{ github.workspace }}/tools/Sophus/build
+          cd ${{ github.workspace }}/tools/Sophus/build
+          cmake ..
+          make -j2
+          sudo make install
+
+      - name: checkout OSQP
+        uses: actions/checkout@v2
+        with:
+          repository: yamaha-bps/osqp
+          ref: v0.6.0
+          path: "tools/osqp"
+          submodules: true
+      - name: Build and install OSQP
+        run: |
+          mkdir ${{ github.workspace }}/tools/osqp/build
+          cd ${{ github.workspace }}/tools/osqp/build
+          cmake -G "Unix Makefiles" ..
+          cmake --build .
+          sudo cmake --build . --target install
+
+      - name: Checkout autodiff
+        uses: actions/checkout@v2
+        with:
+          repository: yamaha-bps/autodiff
+          ref: v0.5.12
+          path: "tools/autodiff"
+      - name: Build and install autodiff
+        run: |
+          mkdir ${{ github.workspace }}/tools/autodiff/build
+          cd ${{ github.workspace }}/tools/autodiff/build
+          cmake ..
+          make -j2
+          sudo make install
+
+      - name: Checkout cbr_utils
+        uses: actions/checkout@v2
+        with:
+          repository: yamaha-bps/cbr_utils
+          path: "tools/cbr_utils"
+      - name: Build and install cbr_utils
+        run: |
+          mkdir ${{ github.workspace }}/tools/cbr_utils/build
+          cd ${{ github.workspace }}/tools/cbr_utils/build
+          cmake .. -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF
+          make -j2
+          sudo make install
+
+      - name: Checkout cbr_math
+        uses: actions/checkout@v2
+        with:
+          repository: yamaha-bps/cbr_math
+          path: "tools/cbr_math"
+      - name: Build and install cbr_math
+        run: |
+          mkdir ${{ github.workspace }}/tools/cbr_math/build
+          cd ${{ github.workspace }}/tools/cbr_math/build
+          cmake .. -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF
+          make -j2
+          sudo make install
+
+      - name: Configure CMake
+        run: |
+          cmake -B ${{ github.workspace }}/build \
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+          -DCMAKE_C_COMPILER=${{ matrix.compiler.cc }} \
+          -DCMAKE_CXX_COMPILER=${{ matrix.compiler.cxx }} \
+          -DBUILD_TESTING=ON
+
+      - name: Build
+        working-directory: ${{ github.workspace }}/build
+        run: make -j2
+
+      - name: Test
+        working-directory: ${{ github.workspace }}/build
+        run: make test
+
+  testcov:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+          lcov \
+          libboost-dev \
+          libgtest-dev \
+          libeigen3-dev \
+          libyaml-cpp-dev
+
+      - name: Checkout Sophus
+        uses: actions/checkout@v2
+        with:
+          repository: yamaha-bps/Sophus
+          path: "tools/Sophus"
+      - name: Build and Install Sophus
+        run: |
+          mkdir ${{ github.workspace }}/tools/Sophus/build
+          cd ${{ github.workspace }}/tools/Sophus/build
+          cmake ..
+          make -j2
+          sudo make install
+
+      - name: checkout OSQP
+        uses: actions/checkout@v2
+        with:
+          repository: yamaha-bps/osqp
+          ref: v0.6.0
+          path: "tools/osqp"
+          submodules: true
+      - name: Build and install OSQP
+        run: |
+          mkdir ${{ github.workspace }}/tools/osqp/build
+          cd ${{ github.workspace }}/tools/osqp/build
+          cmake -G "Unix Makefiles" ..
+          cmake --build .
+          sudo cmake --build . --target install
+
+      - name: Checkout autodiff
+        uses: actions/checkout@v2
+        with:
+          repository: yamaha-bps/autodiff
+          ref: v0.5.12
+          path: "tools/autodiff"
+      - name: Build and install autodiff
+        run: |
+          mkdir ${{ github.workspace }}/tools/autodiff/build
+          cd ${{ github.workspace }}/tools/autodiff/build
+          cmake ..
+          make -j2
+          sudo make install
+
+      - name: Checkout cbr_utils
+        uses: actions/checkout@v2
+        with:
+          repository: yamaha-bps/cbr_utils
+          path: "tools/cbr_utils"
+      - name: Build and install cbr_utils
+        run: |
+          mkdir ${{ github.workspace }}/tools/cbr_utils/build
+          cd ${{ github.workspace }}/tools/cbr_utils/build
+          cmake .. -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF
+          make -j2
+          sudo make install
+
+      - name: Checkout cbr_math
+        uses: actions/checkout@v2
+        with:
+          repository: yamaha-bps/cbr_math
+          path: "tools/cbr_math"
+      - name: Build and install cbr_math
+        run: |
+          mkdir ${{ github.workspace }}/tools/cbr_math/build
+          cd ${{ github.workspace }}/tools/cbr_math/build
+          cmake .. -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF
+          make -j2
+          sudo make install
+
+      - name: Configure CMake
+        run: |
+          cmake -B ${{ github.workspace }}/build \
+          -DCMAKE_BUILD_TYPE=Debug \
+          -DBUILD_TESTING=ON \
+          -DCMAKE_CXX_FLAGS="-O0 -g --coverage -fno-inline" \
+          -DCMAKE_EXE_LINKER_FLAGS="--coverage"
+
+      - name: Build
+        working-directory: ${{ github.workspace }}/build
+        run: make -j2
+
+      - name: Test
+        working-directory: ${{ github.workspace }}/build
+        run: make test
+
+      - name: Analyze coverage
+        working-directory: ${{ github.workspace }}
+        run: |
+          lcov -c --no-external --directory include -d build/CMakeFiles -o coverage.info
+          lcov --list coverage.info
+          bash <(curl -s https://codecov.io/bash) -f coverage.info

@@ -1,6 +1,6 @@
 // Copyright Yamaha 2021
 // MIT License
-// https://github.com/yamaha-bps/cbr_math/blob/master/LICENSE
+// https://github.com/yamaha-bps/cbr_control/blob/master/LICENSE
 
 #ifndef CBR_CONTROL__MPC__DLTV_OCP_SOLVER_HPP_
 #define CBR_CONTROL__MPC__DLTV_OCP_SOLVER_HPP_
@@ -534,7 +534,7 @@ public:
     // Create U
     const Eigen::Map<const Eigen::Matrix<double, nu, nPts - 1>> mU(sol_.z.data() + nX);
 
-    sol_.u.template col(nPts - 1) = mU.template rightCols<1>();
+    sol_.u.col(nPts - 1) = mU.template rightCols<1>();
     sol_.u.template leftCols<nPts - 1>() = mU;
 
     return sol_;

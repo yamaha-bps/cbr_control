@@ -1,6 +1,6 @@
 // Copyright Yamaha 2021
 // MIT License
-// https://github.com/yamaha-bps/cbr_math/blob/master/LICENSE
+// https://github.com/yamaha-bps/cbr_control/blob/master/LICENSE
 
 #ifndef CBR_CONTROL__MPC__DLTV_OCP_HPP_
 #define CBR_CONTROL__MPC__DLTV_OCP_HPP_
@@ -19,10 +19,6 @@ namespace cbr
 /* ---------------------------------------------------------------------------------------------- */
 /*               Continuous Time Varying Linear Optimal Control Problem Discretizer               */
 /* ---------------------------------------------------------------------------------------------- */
-
-struct DltvOcpParams
-{
-};
 
 template<typename cltv_pb_t, std::size_t _nPts = 100, std::size_t exp_order = 4>
 class DltvOcp
@@ -153,20 +149,17 @@ public:
 
   explicit DltvOcp(const cltv_pb_t & pb)
   : cltv_pb_(pb),
-    prm_{},
     dt_{compute_dt()}
   {}
 
   explicit DltvOcp(cltv_pb_t && pb)
   : cltv_pb_(std::move(pb)),
-    prm_{},
     dt_{compute_dt()}
   {}
 
-  template<typename T1, typename T2>
-  DltvOcp(T1 && pb, T2 && prm)
+  template<typename T1>
+  DltvOcp(T1 && pb)
   : cltv_pb_(std::forward<T1>(pb)),
-    prm_(std::forward<T2>(prm)),
     dt_{compute_dt()}
   {}
 
@@ -303,12 +296,6 @@ public:
   }
 
 
-  template<typename T>
-  void set_params(T && p)
-  {
-    prm_ = std::forward<T>(p);
-  }
-
   cltv_pb_t & problem()
   {
     return cltv_pb_;
@@ -329,7 +316,6 @@ protected:
 
 protected:
   cltv_pb_t cltv_pb_{};
-  DltvOcpParams prm_{};
   double dt_{};
 };
 
@@ -341,5 +327,6 @@ template<typename T1, typename T2>
 DltvOcp(T1, T2)->DltvOcp<T1, T2::nPts, T2::expOrder>;
 
 }  // namespace cbr
+
 
 #endif  // CBR_CONTROL__MPC__DLTV_OCP_HPP_

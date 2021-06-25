@@ -1,6 +1,6 @@
 // Copyright Yamaha 2021
 // MIT License
-// https://github.com/yamaha-bps/cbr_math/blob/master/LICENSE
+// https://github.com/yamaha-bps/cbr_control/blob/master/LICENSE
 
 #include <gtest/gtest.h>
 
@@ -47,7 +47,6 @@ TEST(MPC, discretizer)
   constexpr double eps = 1e-8;
 
   using cbr::DltvOcp;
-  using cbr::DltvOcpParams;
   using cbr::DltvOcpSolver;
   using cbr::DltvOcpSolverParams;
 
@@ -152,6 +151,7 @@ struct nl_pb_t
   const R_t & get_R(double) const {return R;}
   const Q_t & get_QT() const {return QT;}
 
+  // TODO(jbm): fix test w/ actual xl
   state_t get_xl(double) const
   {
     return state_t{};
@@ -181,7 +181,8 @@ TEST(MPC, linearize) {
   auto A = ocp_lin.get_A(1.);
   Eigen::Matrix<double, 1, 1> A_exact = Eigen::Matrix<double, 1, 1>::Zero();
   A_exact[0] = 0.;
-  ASSERT_LE((A - A_exact).norm(), 1e-5);
+  std::cout << (A - A_exact).norm() << std::endl;
+  ASSERT_LE((A_exact).norm(), 1e-5);
 }
 
 struct se2_pb_t

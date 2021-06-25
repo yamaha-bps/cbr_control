@@ -1,11 +1,11 @@
 // Copyright Yamaha 2021
 // MIT License
-// https://github.com/yamaha-bps/cbr_math/blob/master/LICENSE
+// https://github.com/yamaha-bps/cbr_control/blob/master/LICENSE
 
 #ifndef CBR_CONTROL__PID_HPP_
 #define CBR_CONTROL__PID_HPP_
 
-#include <boost/fusion/adapted/struct.hpp>
+#include <boost/hana/adapt_struct.hpp>
 
 #include <cbr_utils/cyber_timer.hpp>
 
@@ -188,21 +188,21 @@ protected:
 }    // namespace cbr
 
 // cppcheck-suppress unknownMacro
-BOOST_FUSION_ADAPT_STRUCT(
+BOOST_HANA_ADPAT_STRUCT(
   cbr::PIDClampParams,
   active,
   max,
   min
-)
+);
 
 // cppcheck-suppress unknownMacro
-BOOST_FUSION_ADAPT_STRUCT(
+BOOST_HANA_ADAPT_STRUCT(
   cbr::PIDParams,
   P,
   I,
   D,
   der_tau,
   clamp
-)
+);
 
 #endif  // CBR_CONTROL__PID_HPP_
