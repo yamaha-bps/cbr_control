@@ -1,6 +1,6 @@
 // Copyright Yamaha 2021
 // MIT License
-// https://github.com/yamaha-bps/cbr_math/blob/master/LICENSE
+// https://github.com/yamaha-bps/cbr_control/blob/master/LICENSE
 
 #ifndef DLTV_PROBLEM_HPP_
 #define DLTV_PROBLEM_HPP_
