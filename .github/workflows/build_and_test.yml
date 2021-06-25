@@ -35,7 +35,7 @@ jobs:
       - name: Checkout Sophus
         uses: actions/checkout@v2
         with:
-          repository: strasdat/Sophus
+          repository: yamaha-bps/Sophus
           path: "tools/Sophus"
       - name: Build and Install Sophus
         run: |
@@ -135,7 +135,7 @@ jobs:
       - name: Checkout Sophus
         uses: actions/checkout@v2
         with:
-          repository: strasdat/Sophus
+          repository: yamaha-bps/Sophus
           path: "tools/Sophus"
       - name: Build and Install Sophus
         run: |
