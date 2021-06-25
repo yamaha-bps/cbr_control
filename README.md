@@ -40,11 +40,6 @@
   <p align="center">
     A handy set of tools for the every day controls engineer.
     <br />
-    <a href="https://github.com/yamaha-bps/cbr_control"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/yamaha-bps/cbr_control">View Demo</a>
-    ·
     <a href="https://github.com/yamaha-bps/cbr_control/issues">Report Bug</a>
     ·
     <a href="https://github.com/yamaha-bps/cbr_control/issues">Request Feature</a>
@@ -70,7 +65,6 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -86,9 +80,15 @@
 
 ### Built With
 
-* []()
-* []()
-* []()
+* [Libboost](https://www.boost.org/)
+* [Eigen](https://gitlab.com/libeigen/eigen)
+* [yaml-cpp](https://github.com/jbeder/yaml-cpp)
+* [GTest](https://github.com/google/googletest)
+* [Sophus](https://github.com/strasdat/Sophus)
+* [OSQP](https://github.com/osqp/osqp.git)
+* [Autodiff](https://github.com/autodiff/autodiff)
+* [Cyber Utilities](https://github.com/yamaha-bps/cbr_utils.git)
+* [Cyber Math](https://github.com/yamaha-bps/cbr_mat.git)
 
 
 
@@ -100,29 +100,107 @@ To get a local copy up and running follow these simple steps.
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
-* npm
+* libboost
   ```sh
-  npm install npm@latest -g
+  sudo apt install libboost-dev
   ```
 
+* Eigen
+  ```sh
+  sudo apt install libeigen3-dev
+  ```
+
+* yaml-cpp
+  ```sh
+  sudo apt install libyaml-cpp-dev
+  ```
+
+* GTest (only necessary to build tests)
+  ```sh
+  sudo apt install libgtest-dev
+  ```
+
+* Sophus
+  ```sh
+  git clone https://github.com/strasdat/Sophus.git
+  mkdir Sophus/build
+  cd Sophus/build
+  cmake ..
+  make -j2
+  sudo make install
+  ```
+
+* OSQP
+  ```sh
+  git clone --recursive https://github.com/osqp/osqp.git
+  cd osqp
+  git checkout v0.6.0
+  mkdir build
+  cd build
+  cmake -G "Unix Makefiles" ..
+  cmake --build .
+  sudo cmake --build . --target install
+  ```
+
+* Autodiff
+  ```sh
+  git clone https://github.com/autodiff/autodiff.git
+  cd autodiff
+  git checkout v0.5.12
+  mkdir build
+  cd build
+  cmake ..
+  make -j2
+  sudo make install
+  ```
+
+* Cyber Utilities
+  ```sh
+  git clone https://github.com/yamaha-bps/cbr_utils.git
+  mkdir cbr_utils/build
+  cd cbr_utils/build
+  cmake .. -DBUILD_TESTING=OFF-DBUILD_EXAMPLES=OFF
+  make -j2
+  sudo make install
+  ```
+
+* Cyber Math
+  ```sh
+  git clone https://github.com/yamaha-bps/cbr_math.git
+  mkdir cbr_math/build
+  cd cbr_math/build
+  cmake .. -DBUILD_TESTING=OFF-DBUILD_EXAMPLES=OFF
+  make -j2
+  sudo make install
+  ```
 ### Installation
 
 1. Clone the repo
    ```sh
    git clone https://github.com/yamaha-bps/cbr_control.git
-   ```
-2. Install NPM packages
+2. Make build directory
    ```sh
-   npm install
+   mkdir build
+   ```
+3. Build
+   ```sh
+   cd build
+   cmake .. -DBUILD_TESTING=ON
+   make -j2
+   ```
+4. Install
+   ```sh
+   sudo make install
+   ```
+5. Verify successful install (tests should all pass)
+   ```sh
+   make test
    ```
 
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-See the [open issues](https://github.com/yamaha-bps/cbr_control/issues) for a list of proposed features (and known issues).
-
+6. Uninstall if you don't like it
+   ```sh
+   sudo make uninstall
+   ```
 
 
 <!-- CONTRIBUTING -->
@@ -149,6 +227,8 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Contact
 
 Ben Mains - john_mains@yamaha-motor.com
+
+Taylor Wentzel - taylor_wentzel@yamaha-motor.com
 
 Project Link: [https://github.com/yamaha-bps/cbr_control](https://github.com/yamaha-bps/cbr_control)
 
