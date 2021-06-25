@@ -129,6 +129,7 @@ jobs:
           lcov \
           libboost-dev \
           libgtest-dev \
+          libeigen3-dev \
           libyaml-cpp-dev
 
       - name: Checkout Sophus
