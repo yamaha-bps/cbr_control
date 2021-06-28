@@ -180,6 +180,7 @@ This is an example of how to list things you need to use the software and how to
    git clone https://github.com/yamaha-bps/cbr_control.git
 2. Make build directory
    ```sh
+   cd cbr_control
    mkdir build
    ```
 3. Build
