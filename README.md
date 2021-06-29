@@ -84,6 +84,7 @@
 * [Eigen](https://gitlab.com/libeigen/eigen)
 * [yaml-cpp](https://github.com/jbeder/yaml-cpp)
 * [GTest](https://github.com/google/googletest)
+* [Gnuplot](http://www.gnuplot.info/)
 * [Sophus](https://github.com/strasdat/Sophus)
 * [OSQP](https://github.com/osqp/osqp.git)
 * [Autodiff](https://github.com/autodiff/autodiff)
@@ -99,7 +100,6 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
 * libboost
   ```sh
   sudo apt install libboost-dev
@@ -118,6 +118,11 @@ This is an example of how to list things you need to use the software and how to
 * GTest (only necessary to build tests)
   ```sh
   sudo apt install libgtest-dev
+  ```
+  
+* Gnuplot (only necessary to run examples)
+  ```sh
+  sudo apt install gnuplot
   ```
 
 * Sophus
@@ -179,7 +184,7 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    git clone https://github.com/yamaha-bps/cbr_control.git
    ```
-   
+
 2. Make build directory
    ```sh
    cd cbr_control
