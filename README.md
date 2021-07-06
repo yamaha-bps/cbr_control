@@ -89,7 +89,7 @@
 * [OSQP](https://github.com/osqp/osqp.git)
 * [Autodiff](https://github.com/autodiff/autodiff)
 * [Cyber Utilities](https://github.com/yamaha-bps/cbr_utils.git)
-* [Cyber Math](https://github.com/yamaha-bps/cbr_mat.git)
+* [Cyber Math](https://github.com/yamaha-bps/cbr_math.git)
 
 
 
@@ -119,7 +119,7 @@ To get a local copy up and running follow these simple steps.
   ```sh
   sudo apt install libgtest-dev
   ```
-  
+
 * Gnuplot (only necessary to run examples)
   ```sh
   sudo apt install gnuplot
@@ -254,4 +254,4 @@ Project Link: [https://github.com/yamaha-bps/cbr_control](https://github.com/yam
 [issues-shield]: https://img.shields.io/github/issues/yamaha-bps/cbr_control.svg?style=for-the-badge
 [issues-url]: https://github.com/yamaha-bps/cbr_control/issues
 [license-shield]: https://img.shields.io/github/license/yamaha-bps/cbr_control.svg?style=for-the-badge
-[license-url]: https://github.com/yamaha-bps/cbr_control/blob/master/LICENSE.txt
+[license-url]: https://github.com/yamaha-bps/cbr_control/blob/master/LICENSE
