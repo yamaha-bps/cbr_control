@@ -114,7 +114,7 @@ TEST(PGE, DubinsExample)
 
     boost::numeric::odeint::integrate_const(
       cbr::lie::odeint::euler<state_t<double>, double, dstate_t<double>>(),
-      ode, x, 0., 10., 0.01,
+      ode, x, 0., 0.5, 0.01,
       [&filter, &u, &gauss](const state_t<double> & x, double t)
       {
         auto t_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(
@@ -138,7 +138,7 @@ TEST(PGE, DubinsExample)
 
     boost::numeric::odeint::integrate_const(
       cbr::lie::odeint::euler<state_t<double>, double, dstate_t<double>>(),
-      ode, x, 0., 10., 0.01,
+      ode, x, 0., 0.5, 0.01,
       [&filter, &u, &gauss](const state_t<double> & x, double t)
       {
         auto t_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(
@@ -195,7 +195,7 @@ TEST(PGE, DubinsExampleLinearize)
 
     boost::numeric::odeint::integrate_const(
       cbr::lie::odeint::euler<state_t<double>, double, dstate_t<double>>(),
-      ode, x, 0., 10., 0.01,
+      ode, x, 0., 0.5, 0.01,
       [&filter, &u, &gauss](const state_t<double> & x, double t)
       {
         auto t_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(
@@ -219,7 +219,7 @@ TEST(PGE, DubinsExampleLinearize)
 
     boost::numeric::odeint::integrate_const(
       cbr::lie::odeint::euler<state_t<double>, double, dstate_t<double>>(),
-      ode, x, 0., 10., 0.01,
+      ode, x, 0., 0.5, 0.01,
       [&filter, &u, &gauss](const state_t<double> & x, double t)
       {
         auto t_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(
