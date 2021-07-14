@@ -2,8 +2,8 @@
 // MIT License
 // https://github.com/yamaha-bps/cbr_control/blob/master/LICENSE
 
-#ifndef SEGWAY_DYNAMICS_HPP_
-#define SEGWAY_DYNAMICS_HPP_
+#ifndef EXAMPLES__SEGWAY_DYNAMICS_HPP_
+#define EXAMPLES__SEGWAY_DYNAMICS_HPP_
 
 #include <Eigen/Dense>
 
@@ -549,8 +549,6 @@ auto segway_dynamics(const Eigen::MatrixBase<T1> & x, const Eigen::MatrixBase<T2
 
   xDot = f + g * u;
   return xDot;
-
-
 }
 
-#endif  // SEGWAY_DYNAMICS_HPP_
+#endif  // EXAMPLES__SEGWAY_DYNAMICS_HPP_

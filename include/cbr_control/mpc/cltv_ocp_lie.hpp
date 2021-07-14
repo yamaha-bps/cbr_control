@@ -113,9 +113,10 @@ public:
 public:
   CltvOcpLie() = delete;
   CltvOcpLie(const CltvOcpLie &) = default;
-  CltvOcpLie(CltvOcpLie &&) = default;
+  CltvOcpLie(CltvOcpLie &&) noexcept = default;
   CltvOcpLie & operator=(const CltvOcpLie &) = default;
-  CltvOcpLie & operator=(CltvOcpLie &&) = default;
+  CltvOcpLie & operator=(CltvOcpLie &&) noexcept = default;
+  ~CltvOcpLie() = default;
 
   explicit CltvOcpLie(const lie_pb_t & pb)
   : nl_pb_(pb)
@@ -123,11 +124,6 @@ public:
 
   explicit CltvOcpLie(lie_pb_t && pb)
   : nl_pb_(std::move(pb))
-  {}
-
-  template<typename T1>
-  CltvOcpLie(T1 && pb)
-  : nl_pb_(std::forward<T1>(pb))
   {}
 
   void get_x0(Eigen::Ref<state_t> x0) const

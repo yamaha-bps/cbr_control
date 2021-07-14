@@ -35,10 +35,9 @@ public:
   Derivator() = default;
   Derivator(const Derivator &) = default;
   Derivator(Derivator &) = default;
-  Derivator(Derivator &&) = default;
+  Derivator(Derivator &&) noexcept = default;
   Derivator & operator=(const Derivator &) = default;
-  Derivator & operator=(Derivator &) = default;
-  Derivator & operator=(Derivator &&) = default;
+  Derivator & operator=(Derivator &&) noexcept = default;
   ~Derivator() = default;
 
   template<typename T1>
@@ -85,12 +84,11 @@ public:
         }
         valNm1_ = val;
         return derNm1_;
-      } else {  // with filtering
-        const double e = std::exp(-dt / prm_.filter_tau);
-        derNm1_ = (val - valNm1_) * e / prm_.filter_tau;
-        valNm1_ = valNm1_ * e + (1 - e) * val;
-        return derNm1_;
       }
+      const double e = std::exp(-dt / prm_.filter_tau);
+      derNm1_ = (val - valNm1_) * e / prm_.filter_tau;
+      valNm1_ = valNm1_ * e + (1 - e) * val;
+      return derNm1_;
     }
 
     timer_.tic(tNow);

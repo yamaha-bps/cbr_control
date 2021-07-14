@@ -2,8 +2,8 @@
 // MIT License
 // https://github.com/yamaha-bps/cbr_control/blob/master/LICENSE
 
-#ifndef PLANARQUAD_DYNAMICS_HPP_
-#define PLANARQUAD_DYNAMICS_HPP_
+#ifndef EXAMPLES__PLANARQUAD_DYNAMICS_HPP_
+#define EXAMPLES__PLANARQUAD_DYNAMICS_HPP_
 
 #include <Eigen/Dense>
 
@@ -57,4 +57,4 @@ auto planarquad_dynamics(const Eigen::MatrixBase<T1> & x, const Eigen::MatrixBas
   return xDot;
 }
 
-#endif  // PLANARQUAD_DYNAMICS_HPP_
+#endif  // EXAMPLES__PLANARQUAD_DYNAMICS_HPP_

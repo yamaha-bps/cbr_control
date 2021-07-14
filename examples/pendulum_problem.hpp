@@ -2,8 +2,8 @@
 // MIT License
 // https://github.com/yamaha-bps/cbr_control/blob/master/LICENSE
 
-#ifndef NL_PROBLEM_PENDULUM_HPP_
-#define NL_PROBLEM_PENDULUM_HPP_
+#ifndef EXAMPLES__PENDULUM_PROBLEM_HPP_
+#define EXAMPLES__PENDULUM_PROBLEM_HPP_
 
 #include <cbr_math/math.hpp>
 
@@ -78,7 +78,7 @@ struct NlOcpPendulum
     return pendulum_dynamics<T1, T2>(x, u);
   }
 
-  void get_state_lb(double, Eigen::Ref<state_t> state_lb) const
+  static void get_state_lb(double, Eigen::Ref<state_t> state_lb) const
   {
     const double kInfinity = std::numeric_limits<double>::infinity();
     state_lb <<
@@ -86,7 +86,7 @@ struct NlOcpPendulum
       -cbr::deg2rad(200.0);
   }
 
-  void get_state_ub(double, Eigen::Ref<state_t> state_ub) const
+  static void get_state_ub(double, Eigen::Ref<state_t> state_ub) const
   {
     const double kInfinity = std::numeric_limits<double>::infinity();
     state_ub <<
@@ -94,12 +94,12 @@ struct NlOcpPendulum
       cbr::deg2rad(200.0);
   }
 
-  void get_input_lb(double, Eigen::Ref<input_t> input_lb) const
+  static void get_input_lb(double, Eigen::Ref<input_t> input_lb) const
   {
     input_lb << -0.1;
   }
 
-  void get_input_ub(double, Eigen::Ref<input_t> input_ub) const
+  static void get_input_ub(double, Eigen::Ref<input_t> input_ub) const
   {
     input_ub << 0.1;
   }
@@ -109,4 +109,4 @@ struct NlOcpPendulum
   const Q_t & get_QT() const {return QT;}
 };
 
-#endif  // NL_PROBLEM2_HPP_
+#endif  // EXAMPLES__PENDULUM_PROBLEM_HPP_
