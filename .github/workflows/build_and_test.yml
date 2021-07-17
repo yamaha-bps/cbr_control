@@ -74,6 +74,20 @@ jobs:
           make -j2
           sudo make install
 
+      - name: Checkout ceres
+        uses: actions/checkout@v2
+        with:
+          repository: yamaha-bps/ceres-solver
+          ref: v1.14.0
+          path: "tools/ceres"
+      - name: Build and install ceres
+        run: |
+          mkdir ${{ github.workspace }}/tools/ceres/build
+          cd ${{ github.workspace }}/tools/ceres/build
+          cmake ..
+          make -j2
+          sudo make install
+
       - name: Checkout cbr_utils
         uses: actions/checkout@v2
         with:

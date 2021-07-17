@@ -106,6 +106,7 @@ TEST(PGE, DubinsExample)
   params.buffer_size = 10;
   params.integration_step = 0.1;
   params.linearize_dynamics = false;
+  params.log = false;
 
   // no noise
   {
@@ -187,6 +188,7 @@ TEST(PGE, DubinsExampleLinearize)
   params.history = std::chrono::milliseconds(100);
   params.integration_step = 0.1;
   params.linearize_dynamics = true;
+  params.log = false;
 
   // no noise
   {
