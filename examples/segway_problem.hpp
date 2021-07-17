@@ -2,8 +2,8 @@
 // MIT License
 // https://github.com/yamaha-bps/cbr_control/blob/master/LICENSE
 
-#ifndef NL_PROBLEM_SEGWAY_HPP_
-#define NL_PROBLEM_SEGWAY_HPP_
+#ifndef EXAMPLES__SEGWAY_PROBLEM_HPP_
+#define EXAMPLES__SEGWAY_PROBLEM_HPP_
 
 #include <Eigen/Dense>
 
@@ -43,7 +43,7 @@ struct SegwayProblem
     return segway_dynamics<T1, T2>(x, u);
   }
 
-  void get_state_lb(double, Eigen::Ref<state_t> state_lb) const
+  static void get_state_lb(double, Eigen::Ref<state_t> state_lb) const
   {
     state_lb <<
       -100.,
@@ -55,7 +55,7 @@ struct SegwayProblem
       -31.416;
   }
 
-  void get_state_ub(double, Eigen::Ref<state_t> state_ub) const
+  static void get_state_ub(double, Eigen::Ref<state_t> state_ub) const
   {
     state_ub <<
       100.,
@@ -67,12 +67,12 @@ struct SegwayProblem
       31.416;
   }
 
-  void get_input_lb(double, Eigen::Ref<input_t> input_lb) const
+  static void get_input_lb(double, Eigen::Ref<input_t> input_lb) const
   {
     input_lb << -15, -15;
   }
 
-  void get_input_ub(double, Eigen::Ref<input_t> input_ub) const
+  static void get_input_ub(double, Eigen::Ref<input_t> input_ub) const
   {
     input_ub << 15, 15;
   }
@@ -80,7 +80,6 @@ struct SegwayProblem
   const Q_t & get_Q(double) const {return Q;}
   const R_t & get_R(double) const {return R;}
   const Q_t & get_QT() const {return QT;}
-
 };
 
-#endif  // NL_PROBLEM_SEGWAY_HPP_
+#endif  // EXAMPLES__SEGWAY_PROBLEM_HPP_

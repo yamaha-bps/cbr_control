@@ -44,10 +44,9 @@ public:
   RateLimiter() = default;
   RateLimiter(const RateLimiter &) = default;
   RateLimiter(RateLimiter &) = default;
-  RateLimiter(RateLimiter &&) = default;
+  RateLimiter(RateLimiter &&) noexcept = default;
   RateLimiter & operator=(const RateLimiter &) = default;
-  RateLimiter & operator=(RateLimiter &) = default;
-  RateLimiter & operator=(RateLimiter &&) = default;
+  RateLimiter & operator=(RateLimiter &&) noexcept = default;
   ~RateLimiter() = default;
 
   template<typename T>

@@ -95,9 +95,10 @@ public:
 public:
   CltvOcp() = delete;
   CltvOcp(const CltvOcp &) = default;
-  CltvOcp(CltvOcp &&) = default;
+  CltvOcp(CltvOcp &&) noexcept = default;
   CltvOcp & operator=(const CltvOcp &) = default;
-  CltvOcp & operator=(CltvOcp &&) = default;
+  CltvOcp & operator=(CltvOcp &&) noexcept = default;
+  ~CltvOcp() = default;
 
   explicit CltvOcp(const nl_pb_t & pb)
   : nl_pb_(pb)
@@ -105,11 +106,6 @@ public:
 
   explicit CltvOcp(nl_pb_t && pb)
   : nl_pb_(std::move(pb))
-  {}
-
-  template<typename T1>
-  CltvOcp(T1 && pb)
-  : nl_pb_(std::forward<T1>(pb))
   {}
 
   void get_x0(Eigen::Ref<state_t> x0) const

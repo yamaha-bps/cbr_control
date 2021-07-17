@@ -62,10 +62,9 @@ public:
   PID() = default;
   PID(const PID &) = default;
   PID(PID &) = default;
-  PID(PID &&) = default;
+  PID(PID &&) noexcept = default;
   PID & operator=(const PID &) = default;
-  PID & operator=(PID &) = default;
-  PID & operator=(PID &&) = default;
+  PID & operator=(PID &&) noexcept = default;
   ~PID() = default;
 
   template<typename T>

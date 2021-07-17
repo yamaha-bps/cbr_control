@@ -2,8 +2,8 @@
 // MIT License
 // https://github.com/yamaha-bps/cbr_control/blob/master/LICENSE
 
-#ifndef NL_PROBLEM_SE2_HPP_
-#define NL_PROBLEM_SE2_HPP_
+#ifndef EXAMPLES__SE2_PROBLEM_HPP_
+#define EXAMPLES__SE2_PROBLEM_HPP_
 
 #include <Eigen/Dense>
 #include <cbr_math/lie/Tn.hpp>
@@ -60,4 +60,4 @@ struct SE2Problem
   }
 };
 
-#endif  // NL_PROBLEM_SE2_HPP_
+#endif  // EXAMPLES__SE2_PROBLEM_HPP_

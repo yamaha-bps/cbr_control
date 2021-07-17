@@ -2,8 +2,8 @@
 // MIT License
 // https://github.com/yamaha-bps/cbr_control/blob/master/LICENSE
 
-#ifndef NL_PROBLEM_SO3_HPP_
-#define NL_PROBLEM_SO3_HPP_
+#ifndef EXAMPLES__SO3_PROBLEM_HPP_
+#define EXAMPLES__SO3_PROBLEM_HPP_
 
 #include <Eigen/Dense>
 #include <cbr_math/lie/Tn.hpp>
@@ -36,28 +36,28 @@ struct SO3Problem
     return ret;
   }
 
-  void get_input_lb(double, Eigen::Ref<input_t> input_lb) const
+  static void get_input_lb(double, Eigen::Ref<input_t> input_lb) const
   {
     input_lb.setConstant(-0.3);
   }
 
-  void get_input_ub(double, Eigen::Ref<input_t> input_ub) const
+  static void get_input_ub(double, Eigen::Ref<input_t> input_ub) const
   {
     input_ub.setConstant(0.3);
   }
 
-  Eigen::Matrix<double, nx, nx> get_Q(double) const
+  static Eigen::Matrix<double, nx, nx> get_Q(double) const
   {
     return 0.1 * Eigen::Matrix<double, nx, nx>::Identity();
   }
-  Eigen::Matrix<double, nx, nx> get_QT() const
+  static Eigen::Matrix<double, nx, nx> get_QT() const
   {
     return Eigen::Matrix<double, nx, nx>::Identity();
   }
-  Eigen::Matrix<double, nu, nu> get_R(double) const
+  static Eigen::Matrix<double, nu, nu> get_R(double) const
   {
     return 0.01 * Eigen::Matrix<double, nu, nu>::Identity();
   }
 };
 
-#endif  // NL_PROBLEM_SO3_HPP_
+#endif  // EXAMPLES__SO3_PROBLEM_HPP_

@@ -40,10 +40,9 @@ public:
   Integrator() = default;
   Integrator(const Integrator &) = default;
   Integrator(Integrator &) = default;
-  Integrator(Integrator &&) = default;
+  Integrator(Integrator &&) noexcept = default;
   Integrator & operator=(const Integrator &) = default;
-  Integrator & operator=(Integrator &) = default;
-  Integrator & operator=(Integrator &&) = default;
+  Integrator & operator=(Integrator &&) noexcept = default;
   ~Integrator() = default;
 
   template<typename T>

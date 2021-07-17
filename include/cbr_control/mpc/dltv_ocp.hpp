@@ -143,9 +143,10 @@ public:
 public:
   DltvOcp() = delete;
   DltvOcp(const DltvOcp &) = default;
-  DltvOcp(DltvOcp &&) = default;
+  DltvOcp(DltvOcp &&) noexcept = default;
   DltvOcp & operator=(const DltvOcp &) = default;
-  DltvOcp & operator=(DltvOcp &&) = default;
+  DltvOcp & operator=(DltvOcp &&) noexcept = default;
+  ~DltvOcp() = default;
 
   explicit DltvOcp(const cltv_pb_t & pb)
   : cltv_pb_(pb),
@@ -154,12 +155,6 @@ public:
 
   explicit DltvOcp(cltv_pb_t && pb)
   : cltv_pb_(std::move(pb)),
-    dt_{compute_dt()}
-  {}
-
-  template<typename T1>
-  DltvOcp(T1 && pb)
-  : cltv_pb_(std::forward<T1>(pb)),
     dt_{compute_dt()}
   {}
 

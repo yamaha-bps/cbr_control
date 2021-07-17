@@ -12,6 +12,7 @@ find_package(Eigen3 3.3 REQUIRED)
 find_package(osqp REQUIRED)
 find_package(Sophus REQUIRED)
 find_package(Boost REQUIRED)
+find_package(Ceres REQUIRED)
 find_package(cbr_utils REQUIRED)
 find_package(cbr_math REQUIRED)
 
@@ -34,6 +35,21 @@ target_link_libraries(osqp-cpp
 PUBLIC
   osqp::osqp
   Eigen3::Eigen
+)
+
+add_library(pge SHARED
+  src/ceres_marginalization.cpp
+)
+target_include_directories(pge
+PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+target_link_libraries(pge
+PUBLIC
+  ${CERES_LIBRARIES}
+  cbr_math::cbr_math
+  cbr_utils::cbr_utils
 )
 
 add_library(${PROJECT_NAME} INTERFACE)
@@ -146,5 +162,9 @@ if(BUILD_TESTING)
   add_executable(${PROJECT_NAME}_test_mpc test/test_mpc.cpp)
   target_link_libraries(${PROJECT_NAME}_test_mpc PRIVATE ${PROJECT_NAME} osqp-cpp GTest::Main)
   gtest_discover_tests(${PROJECT_NAME}_test_mpc)
+
+  add_executable(${PROJECT_NAME}_test_pge test/test_pge.cpp)
+  target_link_libraries(${PROJECT_NAME}_test_pge PRIVATE ${PROJECT_NAME} pge GTest::Main)
+  gtest_discover_tests(${PROJECT_NAME}_test_pge)
 endif()
 
